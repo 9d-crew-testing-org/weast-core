@@ -1,0 +1,6 @@
+const app = require("./base.js")
+const map_server = require("./api/images/radar.js")
+const image_server = require("./api/images/images.js")
+map_server.start()
+image_server.start()
+app.listen(3000)

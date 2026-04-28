@@ -1,0 +1,13 @@
+{
+    "please": "rename this file to config.json and fill in all values below",
+    "sessionSecret": "secret",
+    "python": "python3",
+    "webhook": "discord webhook url here",
+    "encoderToken": "discord bot token here",
+    "mainWistKey": "make an api key fo dis",
+    "encoderPort": 3055,
+    "auth": {
+        "local": true,
+        "authServer": "only set this if local auth isnt enabled"
+    }
+}

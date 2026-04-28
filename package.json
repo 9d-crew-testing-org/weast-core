@@ -1,0 +1,30 @@
+{
+  "name": "weast-server",
+  "version": "1.0.0",
+  "description": "WEAST data server for Intellistar 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "date-holidays": "^3.26.2",
+    "discord.js": "^14.23.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mqtt": "^5.15.0",
+    "node-fetch": "^2.7.0",
+    "path": "^0.12.7",
+    "sqlite3": "^5.1.7",
+    "tz-lookup": "^6.1.25",
+    "xml2js": "^0.6.2",
+    "xmldom": "^0.6.0"
+  }
+}
