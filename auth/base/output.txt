@@ -1,0 +1,28 @@
+1: defaultuser0
+  apiKey: aa2034540dbd38c581051a4c755ad940
+  allowed: api/wx,api/weather,api/istar,api/maps,api/images,api/i,api/maps/raw,api/maps,api/maps/latest,api/maps/timestamps,api/maps/timestamps-v2,api/maps/listings
+
+2: 1110712025950195762
+  apiKey: d155db8dd15363ed118aea92c9ff1e54
+  allowed: api/wx,api/weather
+
+3: 598644699263139852
+  apiKey: c62286d79a5dd8cfeab50c8f6064ff6d
+  allowed: api/wx,api/weather
+
+4: 1138990281807642644
+  apiKey: 171d6d5d2472bd6913105909a24f7880
+  allowed: api/wx,api/weather
+
+5: username
+  apiKey: fd7efb090dc6fad9a7a323ce3475fe56
+  allowed: null
+
+6: 1190945832808235139
+  apiKey: 39260a3600333ca3e4828a1bb31c871a
+  allowed: api/wx,api/weather
+
+7: 860544401885102091
+  apiKey: 9af03611c41763f371cec90308cec555
+  allowed: api/wx,api/weather
+
