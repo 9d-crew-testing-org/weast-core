@@ -1,0 +1,91 @@
+ 
+<html>
+<head>
+<display nosave nosend>
+<TITLE>Big Billy's Encoder Emporium</TITLE>
+</head>
+<BODY BGCOLOR=191919 TEXT=44cc55 LINK=189cd6 VLINK=189cd6 HSPACE=0 VSPACE=0>
+<BR><p>
+<center>
+<img src="/bigbilly.gif">
+<h1>
+Welcome to Big Billy's
+<BR>
+Encoder Emporium!
+</h1></center>
+<p><br>
+<h2>
+Choose from any of our fine encoders, and we'll get you all setup.
+</h2>
+<!-- <h3 style="color:red;">The i2HD and i1 encoders aren't working yet, sorry.</h3> -->
+<br>
+<form action="/api/admin">
+<input type="text" name="wish" value="star" hidden>
+<label for="system">I'm looking for a...</label>
+<select name="system">
+  <option value="badreq">Please Select</option>
+  <option value="XD">Intellistar 2 XD</option>
+  <option value="JR">Intellistar 2 JR</option>
+</select>
+<label for="system"> encoder.</label>
+
+<br><br>
+
+<label for="nickname">It's name shall be</label>
+<input type="text" name="nickname" placeholder="John's Intellistar">
+<label for="nickname">.</label>
+
+<br><br>
+
+<label for="ownerid">Weastley <i>(the discord bot)</i></a> should make</label>
+<input type="number" name="ownerid" placeholder="(Discord User ID)">
+<label for="ownerid">the owner.</label>
+<FONT SIZE=1><p>this no longer does anything so it's safe to put any number</p></FONT>
+
+
+<label>Have you any suppressed memories from the last 5 years?</label>
+<select id="help">
+  <option selected>No</option>
+  <option>Yes</option>
+</select>
+<br>
+
+<div id="popup" style="display:none;">
+<br>It's okay.
+</div>
+
+<br>
+<input type="checkbox" name="tos">
+<label for="tos">I agree to the <a href="/tos.txt" target="_blank">ClosedTelecom Terms and Conditions</a>.</label>
+
+<br><br>
+
+<input type="submit" value="Submit.">
+
+</form>
+<BR>
+<HR>
+<CENTER>
+</ul>
+Ask about our 12% employee discount!
+<p>
+<FONT SIZE=1>(No affiliation to
+<a href="https://www.fun-lover.com/webtv/Internal-Source-Codes/Big-Willies/">
+Big Willie's Flash ROM Download Center</a>.)</CENTER><FONT SIZE=3>
+
+<script>
+  const select = document.getElementById("help");
+  const div = document.getElementById("popup");
+
+  select.value = "No";
+  div.style.display = "none";
+
+  select.addEventListener("change", function () {
+    if (this.value === "Yes") {
+      div.style.display = "block";
+    } else {
+      div.style.display = "none";
+    }
+  });
+</script>
+</body> </html>

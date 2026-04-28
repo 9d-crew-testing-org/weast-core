@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>IntelliSTAR Tricks</title>
+</head>
+
+<body bgcolor="#191919" text="#44cc55" link="#36d5ff" vlink="#36d5ff">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+
+<!-- RESTORED SIDEBAR COLUMN -->
+<td valign="top">
+    <img src="/dresden_tricks.jpg">
+</td>
+
+<!-- SPACER COLUMN (same as page 1) -->
+<td width="5">
+    <font color="#191919">sp</font>
+</td>
+
+<!-- MAIN CONTENT -->
+<td valign="top" width="100%">
+
+<h1>IntelliSTAR Tricks</h1>
+
+<table border="0">
+<tbody><tr> 
+<td><a href="https://weastsrv.9dcrew.org/health">Get Service Info</a></td>
+<td width="25"></td>
+<td><a href="/tour.html">Run an API Tour</a></td>
+</tr>
+<tr>
+<td colspan="3" height="6"></td>
+</tr>
+<tr> 
+<td><a href="/bigbilly.html">Visit Big Billy's!</a></td>
+<td width="25"></td>
+<td><a href="/sexyback.html">Visit Nuke-A-Star!</a></td>
+</tr>
+<tr>
+<td colspan="3" height="6"></td>
+</tr>
+<tr> 
+<td><a href="/cleanAuthCues.html">Clean Up</a></td>
+<td width="25"></td>
+<td><a href="/jiffy.html">Weastley's Remains</a></td>
+</tr>
+<tr>
+<td colspan="3" height="6"></td>
+</tr>
+<tr> 
+<td><a href="#" onclick="getouttahere('connect.sid'); return false;">Get me out of here!</a></td>
+<td width="25"></td>
+<td><a href="/credits/">View Credits</a></td>
+</tr>
+</tbody></table>
+
+<br>
+
+<table border="">
+<tbody><tr><td width="250">Weast Production Service</td></tr>
+<tr><td id="speedtest">Running Health Check...</td></tr></tbody></table>
+
+<p>(C) 2026 ClosedTelecom/SpecifiCable.<br><br><i style="color:red;">All WEAST Authorized users: Radar is not currently<br>
+being sent due to a temporary service issue. A client<br>
+update will be released shortly to resolve this<br>
+and restore normal functionality.</i></p>
+
+</td>
+</tr>
+</table>
+
+<script>
+function getouttahere(cookieName) {
+    const hostname = location.hostname;
+    const paths = ["/", location.pathname];
+    const domains = [
+        hostname,
+        "." + hostname,
+        hostname.split(".").slice(-2).join("."),
+        "." + hostname.split(".").slice(-2).join(".")
+    ];
+    paths.forEach(path => {
+        domains.forEach(domain => {
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}; domain=${domain}`;
+        });
+        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+    location.reload(true);
+}
+function humbug(url) {
+    window.open(url, "_blank");
+}
+</script>
+<script>
+async function loadContent(url, elementId) {
+  try {
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.text(); // or .json() if it's JSON
+
+    document.getElementById(elementId).innerHTML = data;
+  } catch (error) {
+    document.getElementById(elementId).innerHTML = "Error: " + error.message;
+  }
+}
+
+loadContent("https://weast.9dcrew.org/api/admin?wish=health", "speedtest");
+</script>
+</body>
+</html>

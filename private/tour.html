@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Cool Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .weather-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .weather-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .weather-details div {
+            flex: 1;
+            text-align: center;
+        }
+        .weather-icon-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #weather-icon {
+            max-width: 100px;
+        }
+        .weather-radar {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .radar-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        /* Forecast Sections Shared Styles */
+        .forecast-section {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            margin-top: 15px;
+        }
+        .item-card {
+            min-width: 100px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+        .item-card img {
+            width: 45px;
+            height: 45px;
+            margin: 5px 0;
+        }
+        .item-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .item-title {
+            font-weight: bold;
+            font-size: 13px !important;
+            margin-bottom: 5px !important;
+            color: #555;
+        }
+
+        /* Specific Daily adjustments */
+        .daily-card {
+            min-width: 160px; /* Slightly wider for forecast text */
+        }
+        .temp-high { color: #d9534f; font-weight: bold; }
+        .temp-low { color: #5bc0de; font-weight: bold; }
+        .forecast-desc { font-size: 11px !important; color: #777; margin-top: 8px !important; line-height: 1.2; }
+
+        /* Nearby Cities adjustments */
+        .nearby-card {
+            min-width: 160px; /* Similar to daily for consistency */
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2, h4 { margin: 0 0 10px; }
+        h3 { margin: 15px 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="weather-section">
+        <div class="weather-info">
+            <h2>Current Weather</h2>
+            <input type="text" id="location" placeholder="Enter location">
+            <button onclick="getWeather()">Get Weather</button>
+
+            <div class="weather-icon-container">
+                <img id="weather-icon" src="" alt="Weather Icon">
+            </div>
+
+            <div id="weather-details" class="weather-details">
+                <div>
+                    <h4>Currently</h4>
+                    <p id="condition">N/A</p>
+                </div>
+                <div>
+                    <h4>Temperature</h4>
+                    <p id="temperature">N/A</p>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div>
+                    <h4>Feels Like</h4>
+                    <p id="feels-like">N/A</p>
+                </div>
+                <div>
+                    <h4>Wind</h4>
+                    <p id="wind">N/A</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-radar">
+            <h2>Weather Radar</h2> 
+            <img id="rimg" src="" alt="Weather Radar" class="radar-image">
+        </div>
+    </div>
+
+    <div class="forecast-section">
+        <h2>Hourly Forecast</h2>
+        <div id="hourly-container" class="scroll-container">
+            <p>Loading hourly data...</p>
+        </div>
+    </div>
+
+    <div class="forecast-section">
+        <h2>7-Day Forecast</h2>
+        <div id="daily-container" class="scroll-container">
+            <p>Loading daily data...</p>
+        </div>
+    </div>
+
+    <div class="forecast-section">
+        <h2>Nearby Cities</h2>
+        <div id="nearby-container" class="scroll-container">
+            <p>Loading nearby cities data...</p>
+        </div>
+    </div>
+
+    <div class="forecast-section">
+        <h2>Almanac</h2>
+        <div id="almanac-container">
+            <p>Loading almanac data...</p>
+        </div>
+    </div>
+
+    <script>
+        async function getWeather(location) {
+            let locationName = location || document.getElementById('location').value;
+            if (!locationName) return;
+
+            // 1. Fetch Current Weather
+            try {
+                const weatherFetch = await fetch(`/api/weather/main?location=${locationName}`);
+                const weatherData = await weatherFetch.json();
+                document.getElementById('weather-icon').src = weatherData.dIconUrl;
+                document.getElementById('rimg').src = weatherData.satradUrl;
+                document.getElementById('condition').innerText = weatherData.wxPhrase.long;
+                document.getElementById('temperature').innerText = weatherData.temperature + "°F";
+                document.getElementById('feels-like').innerText = weatherData.feelsLike + "°F";
+                document.getElementById('wind').innerText = `${weatherData.wind.speed} MPH ${weatherData.wind.direction}`;
+            } catch(e) { console.error("Error fetching current weather:", e); }
+
+            // 2. Fetch Hourly Weather
+            try {
+                const hourlyFetch = await fetch(`https://weast.9dcrew.org/api/wx/hourly?location=${locationName}`);
+                const hourlyData = await hourlyFetch.json();
+                const container = document.getElementById('hourly-container');
+                container.innerHTML = '';
+                
+                hourlyData.slice(0, 24).forEach(hour => {
+                    const time = new Date(hour.timestamp).toLocaleTimeString([], { hour: 'numeric' });
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <p class="item-title">${time}</p>
+                        <img src="${hour.dIconUrl}" alt="icon">
+                        <p><strong>${hour.temperature}°F</strong></p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch(e) { container.innerHTML = '<p>Error loading hourly data.</p>'; }
+
+            // 3. Fetch Daily Weather
+            try {
+                const dailyFetch = await fetch(`https://weast.9dcrew.org/api/wx/daily?location=${locationName}`);
+                const dailyData = await dailyFetch.json();
+                const container = document.getElementById('daily-container');
+                container.innerHTML = '';
+
+                dailyData.forEach(day => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card daily-card';
+                    
+                    // Logic to handle null High (if fetching at night)
+                    const high = day.temperatureHigh !== null ? `${day.temperatureHigh}°` : '--';
+                    const low = day.temperatureLow !== null ? `${day.temperatureLow}°` : '--';
+                    const forecast = day.forecastText.day || day.forecastText.night;
+
+                    card.innerHTML = `
+                        <p class="item-title">${day.weekday}</p>
+                        <img src="${day.dIconUrl}" alt="icon">
+                        <p><span class="temp-high">${high}</span> / <span class="temp-low">${low}</span></p>
+                        <p class="forecast-desc">${forecast}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch(e) { container.innerHTML = '<p>Error loading daily data.</p>'; }
+
+            // 4. Fetch Nearby Cities
+            try {
+                const nearbyFetch = await fetch(`https://weast.9dcrew.org/api/wx/8city?location=${locationName}`);
+                const nearbyData = await nearbyFetch.json();
+                const container = document.getElementById('nearby-container');
+                container.innerHTML = '';
+
+                nearbyData.forEach(city => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card nearby-card';
+                    card.innerHTML = `
+                        <p class="item-title">${city.location.display}</p>
+                        <img src="${city.dIconUrl}" alt="icon">
+                        <p><strong>${city.temperature}°F</strong></p>
+                        <p class="forecast-desc">${city.wxPhrase.long}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch(e) { container.innerHTML = '<p>Error loading nearby cities data.</p>'; }
+
+            // 5. Fetch Almanac
+            try {
+                const almanacFetch = await fetch(`https://weast.9dcrew.org/api/wx/almanac?location=${locationName}`);
+                const almanacData = await almanacFetch.json();
+                const container = document.getElementById('almanac-container');
+                container.innerHTML = '';
+
+                // Sun Times
+                const sunSection = document.createElement('div');
+                sunSection.innerHTML = '<h3>Sun Times</h3>';
+                for (let i = 0; i < almanacData.sunrise.length; i++) {
+                    const sunDate = new Date(almanacData.sunrise[i]);
+                    const sunriseTime = sunDate.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' });
+                    const sunsetTime = new Date(almanacData.sunset[i]).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' });
+                    sunSection.innerHTML += `<span>${sunDate.toLocaleDateString()}: Sunrise ${sunriseTime}, Sunset ${sunsetTime} | </span>`;
+                }
+                container.appendChild(sunSection);
+
+                // Moon Times
+                const moonSection = document.createElement('div');
+                moonSection.innerHTML = '<h3>Moon Times</h3>';
+                for (let i = 0; i < almanacData.moonrise.length; i++) {
+                    const moonDate = new Date(almanacData.moonrise[i]);
+                    const moonriseTime = moonDate.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' });
+                    moonSection.innerHTML += `<span>${moonDate.toLocaleDateString()}: Moonrise ${moonriseTime} | </span>`;
+                }
+                container.appendChild(moonSection);
+
+                // Upcoming Moon Phases
+                const phasesSection = document.createElement('div');
+                phasesSection.innerHTML = '<h3>Upcoming Moon Phases</h3>';
+                const phasesContainer = document.createElement('div');
+                phasesContainer.className = 'scroll-container';
+                almanacData.moonPhases.forEach(phase => {
+                    const phaseDate = new Date(phase.timestamp);
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `
+                        <p class="item-title">${phase.description}</p>
+                        <p>${phaseDate.toLocaleDateString()}</p>
+                        <p>In ~${Math.round(phase.approxDaysFromNow)} days</p>
+                    `;
+                    phasesContainer.appendChild(card);
+                });
+                phasesSection.appendChild(phasesContainer);
+                container.appendChild(phasesSection);
+            } catch(e) { container.innerHTML = '<p>Error loading almanac data.</p>'; }
+        }
+
+        async function loadFirstWeather() {
+            try {
+                const ipFetch = await fetch("https://api.ipify.org?format=json");
+                const { ip } = await ipFetch.json();
+                const geoFetch = await fetch(`https://ipapi.co/${ip}/json/`);
+                const geo = await geoFetch.json();
+                getWeather(`${geo.city}, ${geo.region_code}`);
+            } catch(e) {
+                console.log("Location fallback triggered");
+                getWeather("Rockford, IL"); 
+            }
+        }
+
+        loadFirstWeather();
+    </script>
+</body>
+</html>

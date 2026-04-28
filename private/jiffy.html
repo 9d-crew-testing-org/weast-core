@@ -1,0 +1,105 @@
+<HTML> 
+<HEAD> 
+<TITLE>weastley's remains</TITLE> 
+<display nosend> 
+</HEAD> 
+<BODY BGCOLOR=191919 TEXT=44cc55 LINK=189cd6 VLINK=189cd6> 
+<center>
+<img src="/jiffy.jpg" width=400 height=400>
+<h1>weastley's remains</h1>
+<h2>THIS DOESN'T WORK I'M SORRY I DON'T KNOW WHY</h2>
+</center>
+<p>
+This page replicates most of the functions Weastley had before he got banned from Discord.<br>
+</p>
+<hr> 
+<h2>Restart</h2>
+<h3>Restarts a part or the entirety of an I2.</h3>
+<form action="/api/admin">
+<input type="text" value="bot1" name="wish" hidden>
+<input type="text" placeholder="Star ID" name="starid">
+<select name="type">
+  <option value="badreq">Please Select</option>
+  <option value="vizrt">viz!engine</option>
+  <option value="pipeline">I2jPipeline</option>
+  <option value="rendercontroller">TWC.RenderController</option>
+  <option value="datapump">TWC.DataPump</option>
+  <option value="executioner">TWC.Executioner</option>
+  <option value="remoteman">TWC.RemoteManagement</option>
+  <option value="msgprocess">TWC.MsgProcessor</option>
+  <option value="msgingest">TWC.MsgIngester</option>
+  <option value="service">i2Service</option>
+  <option value="reboot">Reboot System</option>
+</select>
+<input type=submit value="Submit">
+</form>
+<hr>
+<h2>Fake Alert</h2>
+<h3>Sends an alert to a STAR.</h3>
+<form action="/api/admin">
+<input type="text" value="bot2" name="wish" hidden>
+<input type="text" placeholder="Star ID" name="starid">
+<input type="text" placeholder="Name" name="name">
+<input type="text" placeholder="Bulletin Text" name="bulletin">
+<input type="text" placeholder="Expiration" name="expire">
+<input type="text" placeholder="Alert Type (i.e GENERIC)" name="type">
+<input type=submit value="Submit">
+</form>
+<hr>
+<h2>Exec Command</h2>
+<h3>Runs an Exec Command.</h3>
+<form action="/api/admin">
+<input type="text" value="bot3" name="wish" hidden>
+<input type="text" placeholder="Star ID" name="starid">
+<input type="text" placeholder="Exec Command" name="command">
+<input type=submit value="Submit">
+</form>
+<hr>
+<h2>Jiffy-CUE-O-Rama!</h2>
+<h3>Manually runs a playlist.<br>Due to server limitations replace &sol; with ! (i.e domestic/Azul becomes domestic!Azul).</h2>
+<form action="/api/admin" >
+<input type="text" value="bot4" name="wish" hidden>
+<input type="text" placeholder="Star ID" name="starid">
+<input type="text" placeholder="Flavor" name="flavor">
+<input type="text" placeholder="Duration" name="duration">
+<input type=submit value="Submit">
+</form>
+<h3>Have no clue what to put?</h3>
+<!-- kill me later -->
+<select>
+  <option>i2HD/XD Flavors</option>
+  <option>domestic!V (Nemo)</option>
+  <option>domestic!V2016 (Enhanced)</option>
+  <option>domestic!Azul (Azul)</option>
+  <option>domestic!V1 (Nemo Breaking)</option>
+  <option>domestic!V2 (Nemo Severe)</option>
+  <option>domestic!ldlC (Enhanced LDL)</option>
+  <option>domestic!ldlE (Nemo LDL)</option>
+  <option>domestic!azulldl_16 (Azul LDL)</option>
+  <option>domestic!azulldl (Azul LDL Large)</option>
+  <option>domestic!ldlD (Enhanced Breaking LDL)</option>
+  <option>domestic!ldlF (Nemo Breaking LDL)</option>
+  <option>domestic!sidebarXC (Enhanced Sidebar A)</option>
+  <option>domestic!sidebarC (Enhanced Sidebar B)</option>
+  <option>domestic!sidebarXD (Enhanced Sidebar Breaking A)</option>
+  <option>domestic!sidebarD (Enhanced Sidebar Breaking B)</option>
+  <option>domestic!sidebarE (Nemo Sidebar)</option>
+</select>
+<br><br>
+<select>
+  <option>i2JR Flavors</option>
+  <option>domestic!V (Enhanced)</option>
+  <option>domestic!N (Nemo)</option>
+  <option>domestic!azuljr (Azul)</option>
+  <option>domestic!V1 (Enhanced Breaking)</option>
+  <option>domestic!V2 (Enhanced Severe)</option>
+  <option>domestic!ldlC (Enhanced LDL)</option>
+  <option>domestic!ldlE (Nemo LDL)</option>
+  <option>domestic!azulldl_16 (Azul LDL)</option>
+  <option>domestic!ldlD (Enhanced Breaking LDL)</option>
+  <option>domestic!ldlF (Nemo Breaking LDL)</option>
+</select>
+<hr>
+<br><br><br>
+</BODY> </HTML>
+
